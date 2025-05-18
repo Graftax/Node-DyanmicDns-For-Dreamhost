@@ -18,5 +18,8 @@
   "homepage": "https://github.com/Graftax/Node-DyanmicDns-For-Dreamhost#readme",
   "devDependencies": {
     "nodemon": "^3.1.10"
+  },
+  "dependencies": {
+    "express": "^5.1.0"
   }
 }
