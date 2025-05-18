@@ -81,6 +81,17 @@ function updateEntries(hosts, ip) {
     });
 }
 
+const app = express();
+
+// Simple health check endpoint
+app.get('/health', (req, res) => {
+
+  res.json({ status: 'OK' });
+
+});
+
+app.listen(healthPort);
+
 console.log("Starting poll interval.");
 setInterval(()=> {
 
@@ -92,13 +103,8 @@ setInterval(()=> {
 
 }, 1000 * 60 * 5);
 
-const app = express();
+getExternalIP((extIP) => {
 
-// Simple health check endpoint
-app.get('/health', (req, res) => {
-
-  res.json({ status: 'OK' });
+    updateEntries(hostnames, extIP);
 
 });
-
-app.listen(healthPort);
