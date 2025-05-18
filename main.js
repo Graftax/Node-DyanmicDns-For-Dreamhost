@@ -1,4 +1,5 @@
 const express = require('express');
+const http = require("http");
 const https = require("https");
 
 const APIKey = process.env.DH_API_KEY || "";
@@ -90,7 +91,7 @@ app.get('/health', (req, res) => {
 
 });
 
-app.listen(healthPort);
+http.createServer(app).listen(healthPort);
 
 console.log("Starting poll interval.");
 setInterval(()=> {
