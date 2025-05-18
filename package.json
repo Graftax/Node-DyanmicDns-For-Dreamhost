@@ -1,0 +1,22 @@
+{
+  "name": "node-dyanmicdns-for-dreamhost",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Graftax/Node-DyanmicDns-For-Dreamhost.git"
+  },
+  "author": "graftax",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Graftax/Node-DyanmicDns-For-Dreamhost/issues"
+  },
+  "homepage": "https://github.com/Graftax/Node-DyanmicDns-For-Dreamhost#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
