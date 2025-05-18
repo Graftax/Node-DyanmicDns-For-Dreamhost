@@ -10,6 +10,8 @@ services:
     environment:
       - DH_API_KEY=$DH_API_KEY
       - HOSTNAMES=$HOSTNAMES
+    ports:
+      - 6060:6060
     healthcheck:
       test: curl -f http://localhost:6060/health || exit 1
       interval: 30s
