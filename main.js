@@ -3,6 +3,7 @@ const https = require("https");
 
 const APIKey = process.env.DH_API_KEY || "";
 const hostnames = (process.env.HOSTNAMES || "").split(",");
+const healthPort = 6060;
 
 function getRequest(url, callback) {
 
@@ -100,5 +101,4 @@ app.get('/health', (req, res) => {
 
 });
 
-const port = 3000;
-app.listen(port);
+app.listen(healthPort);
