@@ -78,8 +78,13 @@ function updateEntries(hosts, ip) {
     });
 }
 
-getExternalIP((extIP) => {
+console.log("Starting poll interval.");
+setInterval(()=> {
 
-    updateEntries(hostnames, extIP);
+    getExternalIP((extIP) => {
 
-});
+        updateEntries(hostnames, extIP);
+
+    });
+
+}, 1000 * 60 * 5);
