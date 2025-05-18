@@ -8,7 +8,6 @@ services:
     image: nodejs
     container_name: Node-Dyanmic-Dns-For-Dreamhost
     restart: unless-stopped
-    env_file: .env
     environment:
       - DH_API_KEY=$DH_API_KEY
       - HOSTNAMES=$HOSTNAMES
