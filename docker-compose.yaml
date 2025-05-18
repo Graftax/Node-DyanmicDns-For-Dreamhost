@@ -11,3 +11,9 @@ services:
     environment:
       - DH_API_KEY=$DH_API_KEY
       - HOSTNAMES=$HOSTNAMES
+    healthcheck:
+      test: curl -f http://localhost:3000/health || exit 1
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 40s

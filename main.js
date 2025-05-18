@@ -1,4 +1,6 @@
+const express = require('express');
 const https = require("https");
+
 const APIKey = process.env.DH_API_KEY || "";
 const hostnames = (process.env.HOSTNAMES || "").split(",");
 
@@ -88,3 +90,15 @@ setInterval(()=> {
     });
 
 }, 1000 * 60 * 5);
+
+const app = express();
+
+// Simple health check endpoint
+app.get('/health', (req, res) => {
+
+  res.json({ status: 'OK' });
+
+});
+
+const port = 3000;
+app.listen(port);
