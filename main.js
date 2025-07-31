@@ -85,9 +85,7 @@ function updateEntries(hosts, ip) {
     });
 }
 
-
-
-const file = await open(NamesFilepath);
+const file = await open(NamesFilepath, "a+");
 var dnsNames = [];
 
 for await (const line of file.readLines()) {
