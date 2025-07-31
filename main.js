@@ -1,10 +1,13 @@
-const express = require('express');
-const http = require("http");
-const https = require("https");
+import express from "express";
+import http from "http";
+import https from "https";
+import { open } from "fs/promises";
 
 const APIKey = process.env.DH_API_KEY || "";
-const hostnames = (process.env.HOSTNAMES || "").split(",");
-const healthPort = 6060;
+const IntervalSeconds = process.env.INTERVAL_SECONDS || 600;
+const NamesFilepath = process.env.NAMES_FILEPATH || './dns-names.lines';
+
+const healthPort = 6363;
 
 function getRequest(url, callback) {
 
@@ -82,6 +85,17 @@ function updateEntries(hosts, ip) {
     });
 }
 
+
+
+const file = await open(NamesFilepath);
+var dnsNames = [];
+
+for await (const line of file.readLines()) {
+    dnsNames.push(line);
+}
+
+console.log(`Using DNS Names: ${dnsNames}`);
+
 const app = express();
 
 // Simple health check endpoint
@@ -93,19 +107,20 @@ app.get('/health', (req, res) => {
 
 http.createServer(app).listen(healthPort);
 
-console.log("Starting poll interval.");
+getExternalIP((extIP) => {
+
+    updateEntries(dnsNames, extIP);
+
+});
+
+console.log(`Starting poll, interval: ${IntervalSeconds}.`);
+
 setInterval(()=> {
 
     getExternalIP((extIP) => {
 
-        updateEntries(hostnames, extIP);
+        updateEntries(dnsNames, extIP);
 
     });
 
-}, 1000 * 60 * 5);
-
-getExternalIP((extIP) => {
-
-    updateEntries(hostnames, extIP);
-
-});
+}, 1000 * IntervalSeconds);
